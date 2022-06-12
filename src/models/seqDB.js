@@ -23,6 +23,7 @@ db.users = require('./userModel')(sequelize, Sequelize)
 db.posts = require('./postModel')(sequelize, Sequelize)
 db.comments = require('./commentModel')(sequelize, Sequelize)
 db.friends = require('./friendModel')(sequelize, Sequelize)
+db.interests = require('./interestModel')(sequelize, Sequelize)
 
 db.users.hasMany(db.posts, {
     foreignKey: 'userId',
@@ -47,6 +48,11 @@ db.users.hasMany(db.friends, {
     foreignKey: 'friendId',
 })
 db.friends.belongsTo(db.users)
+
+db.interests.belongsTo(db.users)
+db.users.hasMany(db.interests, {
+    foreignKey: 'userId',
+})
 
 module.exports = db
 

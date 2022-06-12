@@ -51,7 +51,7 @@ exports.findAll = (req, res) => {
         })
 }
 
-// Read single user with id get('/:id')
+// Read single post with id get('/:id')
 exports.findOne = (req, res) => {
     const { id } = req.params
 

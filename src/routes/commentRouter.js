@@ -2,7 +2,7 @@ const router = require('express').Router()
 
 const comments = require('../controllers/commentController')
 
-// Create new user
+// Create new 
 router.post('/', comments.create)
 
 // Read all user

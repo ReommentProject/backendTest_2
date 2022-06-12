@@ -8,20 +8,21 @@ const userRouter = require('./routes/userRouters')
 const postRouter = require('./routes/postRouters')
 const commentRouter = require('./routes/commentRouter')
 const friendRouter = require('./routes/friendRouter')
+const interestRouter = require('./routes/interestRouter')
 
-db.sequelize.sync({
-    force: true,
-})
+db.sequelize.sync({})
 app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send('test is working!')
 })
 app.use('/test', testRouter)
+
 app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/comment', commentRouter)
 app.use('/friend', friendRouter)
+app.use('/interests', interestRouter)
 
 const PORT = 9001
 

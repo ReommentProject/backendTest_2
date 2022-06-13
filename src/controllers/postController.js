@@ -39,7 +39,10 @@ exports.findAll = (req, res) => {
     const { id } = req.query
     const condition = id ? { id: { [Op.iLike]: `%${id}` } } : null
 
-    Post.findAll({ where: condition })
+    Post.findAll({
+        where: condition,
+        order: [['createdAt', 'DESC']],
+    })
         .then((data) => {
             res.send(data)
         })
@@ -87,6 +90,44 @@ exports.delete = (req, res) => {
         .catch((err) => {
             res.status(500).send({
                 message: `Could not delete User with id=${id}`,
+            })
+        })
+}
+
+exports.plusLikes = (req, res) => {
+    const { id } = req.body
+
+    Post.findByPk(id)
+        .then(async (data) => {
+            data.set({
+                likes: data.likes + 1,
+            })
+            console.log('this is working!')
+            await data.save()
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: `Some error occurred while Reading post with id = ${id}`,
+            })
+        })
+}
+
+exports.minusLikes = (req, res) => {
+    const { id } = req.body
+
+    Post.findByPk(id)
+        .then(async (data) => {
+            data.set({
+                likes: data.likes - 1,
+            })
+            console.log('this is working!')
+            await data.save()
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: `Some error occurred while Reading post with id = ${id}`,
             })
         })
 }

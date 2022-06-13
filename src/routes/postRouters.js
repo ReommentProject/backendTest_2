@@ -14,5 +14,11 @@ router.get('/:id', posts.findOne)
 // Delete a user with id
 router.delete('/:id', posts.delete)
 
+// plus likes to posts!
+router.post('/upLike', posts.plusLikes)
+
+// minus likes to posts!
+router.post('/downLike', posts.minusLikes)
+
 module.exports = router
 

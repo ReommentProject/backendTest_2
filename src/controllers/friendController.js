@@ -48,3 +48,28 @@ exports.findAll = (req, res) => {
         })
 }
 
+exports.deleteFriend = (req, res) => {
+    const { id } = req.params
+    const { rel } = req.params
+    console.log(`${id} and ${rel}`)
+    Friend.destroy({
+        where: { userId: id, friendId: rel },
+    })
+        .then((num) => {
+            if (num === 1) {
+                res.send({
+                    message: 'User was deleted successfully!',
+                })
+            } else {
+                res.send({
+                    message: `Cannot delete User with id =${id}. Maybe User was not found!`,
+                })
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: `Could not delete User with id=${id}`,
+            })
+        })
+}
+

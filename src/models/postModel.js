@@ -29,6 +29,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
+        interest: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
     })
 
     return Post

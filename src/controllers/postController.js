@@ -19,6 +19,7 @@ exports.create = (req, res) => {
         content: req.body.content,
         thumbnail: req.body.thumbnail,
         link: req.body.link,
+        interest: req.body.interest,
     }
 
     Post.create(post)
@@ -29,7 +30,7 @@ exports.create = (req, res) => {
             res.status(500).send({
                 message:
                     err.message ||
-                    'Some error occurred while Creating new user.',
+                    'Some error occurred while Creating new post.',
             })
         })
 }
@@ -49,7 +50,7 @@ exports.findAll = (req, res) => {
         .catch((err) => {
             res.status(500).send({
                 message:
-                    err.message || 'Some error occurred while Reading all user',
+                    err.message || 'Some error occurred while Reading all post',
             })
         })
 }
@@ -64,7 +65,7 @@ exports.findOne = (req, res) => {
         })
         .catch((err) => {
             res.status(500).send({
-                message: `Some error occurred while Reading user with id = ${id}`,
+                message: `Some error occurred while Reading post with id = ${id}`,
             })
         })
 }
@@ -83,13 +84,13 @@ exports.delete = (req, res) => {
                 })
             } else {
                 res.send({
-                    message: `Cannot delete User with id =${id}. Maybe User was not found!`,
+                    message: `Cannot delete User with id =${id}. Maybe post was not found!`,
                 })
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: `Could not delete User with id=${id}`,
+                message: `Could not delete post with id=${id}`,
             })
         })
 }

@@ -2,20 +2,20 @@ const router = require('express').Router()
 
 const comments = require('../controllers/commentController')
 
-// Create new 
+// Create new comment
 router.post('/', comments.create)
 
-// Read all user
+// Read all comment
 router.get('/', comments.findAll)
 
-// Read single user with id
+// Read comment with id
 router.get('/:id', comments.findOne)
 
-// // Delete a user with id
+// Delete commnet with id
 router.delete('/:id', comments.delete)
 
-// // Delete all Tutorial
-// router.delete('/')
+// read all comment where postid is same
+router.post('/usingpost', comments.findAllByPost)
 
 module.exports = router
 

@@ -17,8 +17,5 @@ router.post('/:id', users.update)
 // // Delete a user with id
 router.delete('/:id', users.delete)
 
-// // Delete all Tutorial
-// router.delete('/')
-
 module.exports = router
 

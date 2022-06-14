@@ -3,7 +3,7 @@ const db = require('../models/seqDB')
 const Friend = db.friends
 const { Op } = db.Sequelize
 
-// Create new user post('/')
+// Create new friendship post('/')
 exports.create = (req, res) => {
     if (!req.body.userId) {
         res.status(400).send({
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
         })
 }
 
-// Read all user get('/')
+// Read all friendship get('/')
 exports.findAll = (req, res) => {
     const { id } = req.query
     const condition = id ? { id: { [Op.iLike]: `%${id}` } } : null
@@ -48,6 +48,7 @@ exports.findAll = (req, res) => {
         })
 }
 
+// break friendship
 exports.deleteFriend = (req, res) => {
     const { id } = req.params
     const { rel } = req.params
@@ -58,17 +59,17 @@ exports.deleteFriend = (req, res) => {
         .then((num) => {
             if (num === 1) {
                 res.send({
-                    message: 'User was deleted successfully!',
+                    message: 'friend was deleted successfully!',
                 })
             } else {
                 res.send({
-                    message: `Cannot delete User with id =${id}. Maybe User was not found!`,
+                    message: `Cannot delete firend with id =${id}. Maybe User was not found!`,
                 })
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: `Could not delete User with id=${id}`,
+                message: `Could not delete friend with id=${id}`,
             })
         })
 }

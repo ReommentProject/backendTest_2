@@ -11,7 +11,7 @@ router.get('/', posts.findAll)
 // Read single post with id
 router.get('/:id', posts.findOne)
 
-// Delete a user with id
+// Delete a post with id
 router.delete('/:id', posts.delete)
 
 // plus likes to posts!

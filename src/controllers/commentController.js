@@ -3,7 +3,7 @@ const db = require('../models/seqDB')
 const Comment = db.comments
 const { Op } = db.Sequelize
 
-// Create new user post('/')
+// Create new comment post('/')
 exports.create = (req, res) => {
     if (!req.body.content) {
         res.status(400).send({
@@ -31,7 +31,7 @@ exports.create = (req, res) => {
         })
 }
 
-// Read all user get('/')
+// Read all comments get('/')
 exports.findAll = (req, res) => {
     const { id } = req.query
     const condition = id ? { id: { [Op.iLike]: `%${id}` } } : null
@@ -49,7 +49,7 @@ exports.findAll = (req, res) => {
         })
 }
 
-// Read single user with id get('/:id')
+// Read single comment with id get('/:id')
 exports.findOne = (req, res) => {
     const { id } = req.params
 
@@ -64,7 +64,28 @@ exports.findOne = (req, res) => {
         })
 }
 
-// Delete a user with id
+// Read comments by postId post("/usingpost")
+exports.findAllByPost = (req, res) => {
+    const { hmm } = req.body
+
+    Comment.findAll({
+        where: {
+            postId: hmm,
+        },
+    })
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message:
+                    err.message ||
+                    'Some error occurred while Reading all comments',
+            })
+        })
+}
+
+// Delete a comment with id
 exports.delete = (req, res) => {
     const { id } = req.params
 
@@ -88,6 +109,4 @@ exports.delete = (req, res) => {
             })
         })
 }
-
-// Delete all Tutorial
 
